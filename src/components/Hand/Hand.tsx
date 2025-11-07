@@ -1,6 +1,4 @@
-// src/components/Hand/Hand.tsx
-import React from 'react';
-import { type Card as CardType } from '../../types/card.types'; // Renamed type
+import { type Card as CardType } from '../../types/card.types';
 import { type GamePhase } from '../../types/game.types';
 import { Card } from '../Card/Card';
 import styles from './Hand.module.css';

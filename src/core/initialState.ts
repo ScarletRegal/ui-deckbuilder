@@ -1,4 +1,4 @@
-import { type GameState, type GamePhase, type PlayerState, type DesignCanvas } from '../types/game.types';
+import { type GameState, type DesignCanvas } from '../types/game.types';
 import { type Card } from '../types/card.types';
 import { cardLibrary } from './cardLibrary';
 import { v4 as uuidv4 } from 'uuid';

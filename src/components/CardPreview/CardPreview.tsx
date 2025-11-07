@@ -1,4 +1,3 @@
-import React from 'react';
 import { type Card as CardType } from '../../types/card.types';
 import styles from './CardPreview.module.css';
 

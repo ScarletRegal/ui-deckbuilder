@@ -2,7 +2,6 @@ import { type GameState, type PlayerState } from '../types/game.types';
 import { type Card, type CardEffect } from '../types/card.types';
 import { v4 as uuidv4 } from 'uuid';
 import { cardLibrary } from './cardLibrary';
-import { jsx } from 'react/jsx-runtime';
 
 
 const getCardTemplate = (function () {
