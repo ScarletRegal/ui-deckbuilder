@@ -66,6 +66,7 @@ function App() {
         useSensor(PointerSensor, {
             // Wait for a 10px drag before activating
             activationConstraint: {
+                delay: 250,
                 distance: 10,
             },
         }),
