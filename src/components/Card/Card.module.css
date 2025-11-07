@@ -11,6 +11,14 @@
   /* 2. The new margin is based on the *scaled* size.
   */
   margin-left: -180px;
+
+  touch-action: none; 
+  
+  /* Also helps prevent text from being selected during a drag */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   
   /* 3. All transforms are now set in JS via the `style` prop */
   transform: none; 
