@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useState } from 'react';
-import { DndContext, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
+import { DndContext, PointerSensor, useSensor, useSensors, type DragEndEvent, TouchSensor } from '@dnd-kit/core';
 
 import { initialState } from './core/initialState';
 import { type GameState } from './types/game.types';
@@ -70,6 +70,13 @@ function App() {
                 distance: 10,
             },
         }),
+        useSensor(TouchSensor, {
+            // Also wait for a 10px drag for touch
+            activationConstraint: {
+                delay: 250,
+                distance: 10,
+            },
+        })
     );
 
     // --- Game Start Effect ---
