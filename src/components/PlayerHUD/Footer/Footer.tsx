@@ -2,12 +2,14 @@ import styles from './Footer.module.css';
 
 interface FooterProps {
     onEndTurnClick: () => void;
+    onDeckClick?: () => void;
     isTurnDisabled: boolean;
+    isDeckDisabled: boolean;
     playerFocus: number;
     maxFocus: number;
 }
 
-export function Footer({ onEndTurnClick, isTurnDisabled, playerFocus, maxFocus }: FooterProps) {
+export function Footer({ onEndTurnClick, onDeckClick, isTurnDisabled, isDeckDisabled, playerFocus, maxFocus }: FooterProps) {
 
     const focusDots = [];
     for (let i = 0; i < maxFocus; i++) {
@@ -21,7 +23,11 @@ export function Footer({ onEndTurnClick, isTurnDisabled, playerFocus, maxFocus }
 
     return (
         <footer className={styles.footerArea}>
-            <button className={styles.deckButton}>
+            <button
+                className={styles.deckButton}
+                onClick={onDeckClick}
+                disabled={isDeckDisabled}
+            >
                 <span className="icon">playing_cards</span>
             </button>
 

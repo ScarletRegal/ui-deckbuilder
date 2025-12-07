@@ -8,9 +8,10 @@ interface CardProps {
     card: CardType;
     isDisabled: boolean;
     onPreview: (card: CardType) => void;
-    rotation: number;
-    translateY: number;
-    zIndex: number;
+    rotation?: number;
+    translateY?: number;
+    zIndex?: number;
+    mode?: 'hand' | 'grid';
 }
 
 const BASE_SCALE = 0.5;
@@ -20,9 +21,10 @@ export function Card({
     card,
     isDisabled,
     onPreview,
-    rotation,
-    translateY,
-    zIndex
+    rotation = 0,
+    translateY = 0,
+    zIndex = 0,
+    mode = 'hand',
 }: CardProps) {
 
     const [isHovering, setIsHovering] = useState(false);
@@ -54,13 +56,13 @@ export function Card({
     }, [isDragging, isHovering, transform, rotation, translateY, zIndex]);
 
     const handleClick = () => {
-        if (!isDisabled) {
+        if (!isDisabled || mode === 'grid') {
             onPreview(card);
         }
     };
 
     const classNames = `${styles.cardWrapper} ${isDisabled ? styles.disabled : ''
-        } ${isDragging ? styles.dragging : ''}`;
+        } ${isDragging ? styles.dragging : ''} ${mode === 'grid' ? styles.gridMode : ''}`;
 
     return (
         <div

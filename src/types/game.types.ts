@@ -1,4 +1,5 @@
 import { type Card } from './card.types';
+import type { Encounter } from './encounter.types';
 
 /**
  * The text style object, which we can now re-use.
@@ -37,9 +38,13 @@ export interface DesignCanvas {
     widthMode: "fluid" | "fixed" | "fit";
     heightMode: "fluid" | "fixed" | "fit";
     padding: number;
-    layout: "auto" | "row" | "column";
+    layout: "block" | "row" | "column";
+    shape: "square" | "rectangle" | "rounded";
+    fillType: "solid" | "opaque" | "none";
+    borderRadius: number;
 
     // Color properties
+    activePaletteId: string;
     paletteName: string;
     colors: string[];
     activeColor: string | null;
@@ -83,14 +88,19 @@ export interface PlayerState {
  * The single source of truth for the entire game.
  * This object holds all "global" state.
  */
-export type GamePhase = "setup" | "playerTurn" | "opponentTurn" | "gameOver";
+export type GamePhase = "home" | "tutorialChoice" | "setup" | "playerTurn" | "results" | "reward" | "runOver";
 
 export interface GameState {
     phase: GamePhase;
-
-    prompt: { componentName: string; };
     turnsRemaining: number;
     maxTurns: number;
+
+    currentEncounter: Encounter | null;
+    encounterIndex: number;
+
+    rewardCards: Card[];
+
+    tutorialMessage: string | null;
 
     player: PlayerState;
 }

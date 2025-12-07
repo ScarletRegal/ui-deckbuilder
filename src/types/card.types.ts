@@ -22,20 +22,20 @@ export enum SubCategory {
  */
 export type CardEffect =
     | { type: "SET_CANVAS_PROP"; property: string; value: any }
-    | { type: "APPLY_IMPACT"; amount: number }
     | { type: "DRAW_CARDS"; amount: number }
-    | {
-        type: "GENERATE_CARD";
-        fromCardPool: string[];
-        amount: number;
-    }
     | { type: "MODIFY_FOCUS"; amount: number }
+    | { type: "GENERATE_CARD"; fromCardPool: string[]; amount: number }
+    | { type: "GENERATE_SET_CARDS"; fromCardPool: string[]; }
+    | { type: "ADD_TEXT"; text: string; styleName: string; color: string; }
     | { type: "ADD_ICON"; icon: CanvasIcon }
-    | { type: "ADD_TEXT"; text: string; styleName: string }
-    | {
-        type: "APPLY_COLOR_TO";
-        target: 'fill' | 'stroke' | 'text' | 'icon';
-    };
+    | { type: "ADD_ENCOUNTER_TEXT" }
+    | { type: "ADD_ENCOUNTER_ICON" }
+    | { type: "APPLY_COLOR_TO"; target: 'fill' | 'stroke' | 'text' | 'icon' }
+    | { type: "MODIFY_PROPERTY"; property: "padding"; amount: number; }
+    | { type: "SET_ACTIVE_COLOR_FROM_PALETTE"; index: number | "random"; }// 0 for primary, "random" for random
+    | { type: "ADD_RANDOM_TEXT_STYLE"; text: string; }
+    | { type: "SET_PALETTE"; paletteId: string; }
+    | { type: "GENERATE_PALETTE_CARD"; amount: number; strategy: "random" | "primary" };
 
 /**
  * The main Card interface.
@@ -54,4 +54,5 @@ export interface Card {
     effects: CardEffect[];
 
     exhausts?: boolean;
+    isTemporary?: boolean;
 }

@@ -1,0 +1,120 @@
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+  overflow-y: auto;
+  padding: 24px 12px; /* Add padding to prevent edge touching */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.title {
+  color: #4caf50;
+  font-size: 2rem;
+  margin: 0 0 16px 0;
+}
+
+.feedback {
+  color: #eee;
+  text-align: center;
+  margin-bottom: 24px;
+  max-width: 400px;
+  line-height: 1.4;
+}
+
+.instructions {
+  color: var(--primary-light);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.cardContainer {
+  display: flex;
+  width: 100%;
+  margin-bottom: 32px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+/* Wrapper to handle selection border and scaling */
+.rewardCardWrapper {
+  position: relative;
+  transform: scale(0.8); /* Scale down to fit */
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-radius: 18px;
+  /* Transparent border by default to prevent layout jumps */
+  border: 4px solid transparent; 
+}
+
+.rewardCardWrapper:hover {
+  transform: scale(0.85);
+}
+
+/* Selected State */
+.selected {
+  border-color: #4caf50; /* Green selection border */
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+  transform: scale(0.85);
+}
+
+.checkmark {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 20;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.proceedButton {
+  background-color: var(--primary-main);
+  color: white;
+  border: none;
+  padding: 16px 48px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: var(--shadow-2);
+  transition: all 0.2s ease;
+  position: sticky;
+  bottom: 24px;
+}
+
+.proceedButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}

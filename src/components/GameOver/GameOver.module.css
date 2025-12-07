@@ -1,21 +1,59 @@
-.gameOverOverlay {
+.backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
+  padding: 24px;
 }
 
-.gameOverOverlay button {
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
+.content {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: shake 0.4s ease;
+}
+
+.title {
+  color: #f44336; /* Error Red */
+  font-size: 2rem;
+  margin: 0 0 16px 0;
+}
+
+.feedbackBox {
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #f44336;
+  padding: 16px;
   border-radius: 8px;
+  color: #eee;
+  width: 100%;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.restartButton {
   background: var(--primary-main);
   color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.1s;
+}
+
+.restartButton:active {
+  transform: scale(0.95);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }

@@ -1,79 +1,135 @@
-// src/components/PlayerEffects/PlayerEffects.tsx
-import React from 'react';
+import { useState } from 'react';
 import styles from './Effects.module.css';
 
 interface EffectsProps {
     paletteName: string;
+    paletteColors: string[];
     fontFamily: string;
     activeColor: string | null;
 }
 
-// Define our effect types
-type Effect = {
-    id: string;
-    label: string;
-    description: string;
-    render: () => React.ReactNode;
-};
+type EffectType = 'palette' | 'font' | 'color';
 
 export function Effects({
     paletteName,
+    paletteColors,
     fontFamily,
     activeColor
 }: EffectsProps) {
 
-    const effects: Effect[] = [];
+    const [activePopup, setActivePopup] = useState<EffectType | null>(null);
 
-    // --- 1. Persistent: Current Palette ---
-    effects.push({
-        id: 'palette',
-        label: 'Palette',
-        description: `Your active palette is "${paletteName}". This will be used for generated colors.`,
-        render: () => <span className="icon">palette</span>,
-    });
-
-    // --- 2. Persistent: Current Font Family ---
-    effects.push({
-        id: 'font',
-        label: 'Font',
-        description: `Your active font is "${fontFamily}". This will be used for new text elements.`,
-        render: () => <span className="icon">text_fields</span>,
-    });
-
-    // --- 3. Conditional: Active Color ---
-    if (activeColor) {
-        effects.push({
-            id: 'activeColor',
-            label: 'Color',
-            description: `You have "${activeColor}" selected. Playing this on an element will apply it and consume the effect.`,
-            render: () => (
-                // Render a color swatch
-                <div
-                    className={styles.colorSwatch}
-                    style={{ backgroundColor: activeColor }}
-                />
-            ),
-        });
-    }
-
-    // Simple click handler to show description
-    const handleEffectClick = (description: string) => {
-        alert(description);
-        // In the future, this could open a custom modal
-    };
+    const closePopup = () => setActivePopup(null);
 
     return (
-        <div className={styles.effectsContainer}>
-            {effects.map(effect => (
+        <>
+            {/* --- THE MAIN BAR (Always Visible) --- */}
+            <div className={styles.effectsContainer}>
+
+                {/* Palette Button */}
                 <div
-                    key={effect.id}
                     className={styles.effectIcon}
-                    onClick={() => handleEffectClick(effect.description)}
-                    title={effect.label} // Tooltip for desktop
+                    onClick={() => setActivePopup('palette')}
+                    title="Current Palette"
                 >
-                    {effect.render()}
+                    <span className="icon">palette</span>
                 </div>
-            ))}
-        </div>
+
+                {/* Font Button */}
+                <div
+                    className={styles.effectIcon}
+                    onClick={() => setActivePopup('font')}
+                    title="Current Font"
+                >
+                    <span className="icon">text_fields</span>
+                </div>
+
+                {/* Active Color (Only if active) */}
+                {activeColor && (
+                    <div
+                        className={styles.effectIcon}
+                        onClick={() => setActivePopup('color')}
+                        title="Active Color"
+                    >
+                        <div
+                            className={styles.miniSwatch}
+                            style={{ backgroundColor: activeColor }}
+                        />
+                    </div>
+                )}
+            </div>
+
+            {/* --- THE POPUP OVERLAY (Conditional) --- */}
+            {activePopup && (
+                <div className={styles.backdrop} onClick={closePopup}>
+                    <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
+
+                        {/* Header */}
+                        <div className={styles.popupHeader}>
+                            <h3 className={styles.popupTitle}>
+                                {activePopup === 'palette' && 'Active Palette'}
+                                {activePopup === 'font' && 'Active Font'}
+                                {activePopup === 'color' && 'Active Color Buff'}
+                            </h3>
+                            <button className={styles.closeButton} onClick={closePopup}>
+                                <span className="icon">close</span>
+                            </button>
+                        </div>
+
+                        {/* Content Area */}
+                        <div className={styles.popupContent}>
+
+                            {/* 1. PALETTE PREVIEW */}
+                            {activePopup === 'palette' && (
+                                <>
+                                    <div className={styles.paletteName}>{paletteName}</div>
+                                    <div className={styles.paletteGrid}>
+                                        {paletteColors.map((color, idx) => (
+                                            <div
+                                                key={idx}
+                                                className={styles.colorCell}
+                                                style={{ backgroundColor: color }}
+                                                title={color}
+                                            />
+                                        ))}
+                                    </div>
+                                    <p className={styles.description}>
+                                        Cards like "Generate Color" will create cards from this pool.
+                                    </p>
+                                </>
+                            )}
+
+                            {/* 2. FONT PREVIEW */}
+                            {activePopup === 'font' && (
+                                <>
+                                    <div className={styles.fontPreview} style={{ fontFamily: fontFamily }}>
+                                        Aa
+                                    </div>
+                                    <div className={styles.fontName}>{fontFamily}</div>
+                                    <p className={styles.description}>
+                                        All new text elements added to the design will use this typeface.
+                                    </p>
+                                </>
+                            )}
+
+                            {/* 3. ACTIVE COLOR PREVIEW */}
+                            {activePopup === 'color' && activeColor && (
+                                <>
+                                    <div
+                                        className={styles.largeSwatch}
+                                        style={{ backgroundColor: activeColor }}
+                                    />
+                                    <div className={styles.colorCode}>{activeColor}</div>
+                                    <p className={styles.description}>
+                                        You have a color loaded! The next ELEMENT card you play will use this color.
+                                    </p>
+                                </>
+                            )}
+
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }

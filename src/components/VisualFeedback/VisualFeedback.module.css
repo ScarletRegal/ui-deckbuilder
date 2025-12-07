@@ -1,0 +1,144 @@
+.overlayContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; 
+  overflow: visible; 
+  z-index: 10; 
+}
+
+.paddingBox {
+  position: absolute;
+  inset: 0;
+  border-color: rgba(255, 0, 255, 0.15); 
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: inset 0 0 0 1px rgba(255, 0, 255, 0.3);
+}
+
+.paddingBox.active {
+  opacity: 1;
+}
+
+.arrowContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  opacity: 0.8;
+}
+
+.arrowContainer.column {
+  flex-direction: column;
+}
+
+.arrowIcon {
+  font-size: 48px;
+  color: var(--primary-main);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.animateRight {
+  animation: slideRight 1s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideRight {
+  0% { transform: translateX(-20px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(20px); opacity: 0; }
+}
+
+.animateDown {
+  animation: slideDown 1s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-20px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(20px); opacity: 0; }
+}
+
+.delay1 { animation-delay: 0.1s; }
+.delay2 { animation-delay: 0.2s; }
+
+.activeColorSwatch {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  border: 4px solid white; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  animation: absorbBuff 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.colorFlash {
+  position: absolute;
+  inset: 0;
+  animation: flash 0.6s ease-out forwards;
+  mix-blend-mode: overlay; 
+}
+
+@keyframes flash {
+  0% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+/* --- NEW: PALETTE SWATCH ANIMATION --- */
+.paletteSwatch {
+  position: absolute;
+  /* Top/Left will be set dynamically or defaults to center */
+  top: 50%;
+  
+  /* Smaller size to fit 3 side-by-side */
+  width: 56px; 
+  height: 56px;
+  
+  /* Completely Round */
+  border-radius: 50%; 
+  
+  border: 3px solid white; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  
+  /* Ensure it centers on its coordinates */
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  
+  /* Start hidden so the staggered delay works cleanly */
+  opacity: 0; 
+  
+  /* Re-use the same "pop and drop" animation */
+  animation: absorbBuff 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes absorbBuff {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  15% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    /* Fly down towards footer */
+    transform: translate(-50%, 350px) scale(0.2);
+    opacity: 0; 
+  }
+}

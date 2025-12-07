@@ -7,10 +7,6 @@
   height: 350px;
   
   flex-shrink: 0;
-  
-  /* 2. The new margin is based on the *scaled* size.
-  */
-  margin-left: -180px;
 
   touch-action: none; 
   
@@ -41,6 +37,17 @@
 .cardWrapper.disabled .cardContent {
   background: #e0e0e0;
   color: var(--text-secondary);
+}
+
+.cardWrapper.gridMode {
+  margin-left: 0;
+  margin-right: 0;
+  transform-origin: top left;
+}
+
+/* Ensure the first child reset doesn't conflict */
+.cardWrapper:first-child {
+  margin-left: 0;
 }
 
 

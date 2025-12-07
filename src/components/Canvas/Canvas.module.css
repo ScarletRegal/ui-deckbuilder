@@ -20,7 +20,7 @@
 .playerCanvas {
     position: absolute;
     left: 50%;
-    top: 32px;
+    top: 20px;
     transform: translateX(-50%);
 
     width: 200px;
@@ -34,23 +34,49 @@
 .corner {
     position: absolute;
     background: var(--surface-color);
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border: 2px solid var(--primary-light);
 }
 .corner:nth-child(1) {
-    left: -10px;
-    top: -10px;
+    left: -8px;
+    top: -8px;
 }
 .corner:nth-child(2) {
-    right: -10px;
-    top: -10px;
+    right: -8px;
+    top: -8px;
 }
 .corner:nth-child(3) {
-    right: -10px;
-    bottom: -10px;
+    right: -8px;
+    bottom: -8px;
 }
 .corner:nth-child(4) {
-    left: -10px;
-    bottom: -10px;
+    left: -8px;
+    bottom: -8px;
+}
+
+.infoButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e0e0e0;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-1);
+  transition: all 0.2s ease;
+  z-index: 20;
+}
+
+.infoButton:hover {
+  background-color: var(--surface-color);
+  color: var(--primary-main);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-2);
 }

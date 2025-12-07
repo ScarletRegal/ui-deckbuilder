@@ -4,9 +4,10 @@ interface HeaderProps {
     turnsRemaining: number;
     maxTurns: number;
     prompt: string;
+    onPause?: () => void;
 }
 
-export function Header({ turnsRemaining, maxTurns, prompt }: HeaderProps) {
+export function Header({ turnsRemaining, maxTurns, prompt, onPause }: HeaderProps) {
     // Calculate timer percentage
     const timerPercent = (turnsRemaining / maxTurns) * 100;
 
@@ -24,7 +25,7 @@ export function Header({ turnsRemaining, maxTurns, prompt }: HeaderProps) {
             <div className={styles.promptChip}>
                 {prompt}
             </div>
-            <button className={styles.pauseButton}>
+            <button className={styles.pauseButton} onClick={onPause}>
                 <span className="icon">pause</span>
             </button>
         </header>

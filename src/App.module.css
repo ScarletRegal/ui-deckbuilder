@@ -1,7 +1,33 @@
 /* src/App.module.css */
+.tutorialHelpButton {
+  position: absolute;
+  bottom: 100px; 
+  left: 20px;
+  
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--surface-color);
+  color: var(--primary-main);
+  border: 2px solid var(--primary-light);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 60;
+  transition: transform 0.2s ease;
+}
 
-.gameBoard {
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto auto 1fr;
+.tutorialHelpButton:hover {
+  transform: scale(1.1);
+  background-color: var(--primary-light);
+  color: white;
+  border-color: var(--primary-main);
+}
+
+.tutorialHelpButton .icon {
+  font-size: 20px;
+  font-weight: bold;
 }

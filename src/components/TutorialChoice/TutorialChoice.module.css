@@ -1,0 +1,82 @@
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.8); /* Dark overlay */
+  padding: 24px;
+  position: absolute;
+  inset: 0;
+  z-index: 2000;
+}
+
+.card {
+  background-color: var(--surface-color);
+  border-radius: 24px;
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: var(--shadow-3);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.title {
+  color: var(--primary-main);
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+.description {
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tutorialButton {
+  background-color: var(--primary-main);
+  color: white;
+  border: none;
+  padding: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tutorialButton:hover {
+  background-color: var(--primary-dark);
+}
+
+.skipButton {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 2px solid #e0e0e0;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.skipButton:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

@@ -65,7 +65,7 @@
   background-color: var(--primary-dark) !important;
   width: 72px;
 }
-.endTurnButton:disabled {
+button:disabled {
   background-color: #bdbdbd !important;
   cursor: not-allowed;
 }
