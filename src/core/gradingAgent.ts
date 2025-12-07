@@ -58,10 +58,7 @@ export async function gradeDesign(
     canvas: DesignCanvas
 ): Promise<GradeResult> {
 
-    // ⚠️ IMPORTANT: Replace this with your actual API key or use an env variable
-    // Never hard-code an API key in a React app for production.
-    // For a local prototype, you can, but the standard way is to use a .env file.
-    const apiKey = "AIzaSyCwC3CpYo4_7iItI9o7b8UyupK_ctuwHas";
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-latest:generateContent?key=${apiKey}`;
 
