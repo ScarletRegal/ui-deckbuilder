@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { type DesignCanvas } from '../../types/game.types';
 import styles from './VisualFeedback.module.css';
 
